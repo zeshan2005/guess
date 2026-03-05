@@ -1,0 +1,62 @@
+<!-- /*number guessing game*/ -->
+<link href="game.css" rel="stylesheet" type="text/css">
+<html>
+<head>
+    <title>Number Guessing Game</title>
+
+<body>
+    <h1 class="title">Number Guessing Game</h1>
+    <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+    <p>you have 10 guesses</p>
+    <button class="button" onclick="startGame()">Start Game</button>
+    <button class="button" onclick="resetGame()">Reset Game</button>
+
+<script>
+    let secretNumber;
+    let guessCount = 0;
+    let maxGuesses = 10;
+    let gameOver = false;
+
+    function startGame() {
+        secretNumber = Math.floor(Math.random() * 100) + 1;
+        guessCount = 0;
+        gameOver = false;
+        alert("Game started! Guess a number between 1 and 100. Press OK to start guessing.");
+    }
+    function resetGame() {
+        secretNumber = null;
+        guessCount = 0;
+        gameOver = false;
+        alert("Game reset! Press Start Game to play again.");
+    }
+
+</script>
+<p>Insert first number here:</p>
+<input type="number" id="guessInput" min="1" max="100">
+<button class="button" onclick="checkGuess()">Submit Guess</button>
+<p id="result"></p>
+<p id="guesses"></p>
+
+<script>
+    function checkGuess() {
+        if (gameOver) {
+            return;
+        }
+        const guessInput = document.getElementById("guessInput");
+        const guess = parseInt(guessInput.value);
+        guessCount++;
+        guessInput.value = "";
+        if (guess === secretNumber) {
+            alert("Congratulations! You guessed the number in " + guessCount + " guesses.");
+            gameOver = true;
+            return;
+        } else if (guess < secretNumber) {
+            alert("Too low! Try again.");
+        } else {
+            alert("Too high! Try again.");
+        }
+    }
+</script>
+</head>
+</body>
+</html>
